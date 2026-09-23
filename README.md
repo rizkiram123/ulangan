@@ -66,3 +66,21 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 - json (enabled by default - don't turn it off)
 - [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
 - [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+
+---
+
+## Documentation - Ujian Vibe Code
+- **Nama Aplikasi / Tema**: Warung Bubur Pedas Khas Sambas
+- **Database**: `ulangan`
+- **Tabel**: `bubur_pedas`
+- **Warna Utama**: `#6366F1`
+- **Warna Aksen**: `#FDE68A`
+- **Variasi Menu**: 8 Variasi Awal (Seeder)
+- **Fitur Lengkap**:
+  1. Setup Database & Migrasi (`bubur_pedas`)
+  2. CRUD Admin (Create, Read, Update, Delete)
+  3. Desain Responsive Tailwind CSS (via CDN)
+  4. Halaman Detail Menu dengan Visual AI & Komposisi Rempah
+  5. Fitur 1: Pencarian (Search by Title, Description & Category)
+  6. Fitur 2: Filter (Multi-Category Pills & Price Sorting)
+
