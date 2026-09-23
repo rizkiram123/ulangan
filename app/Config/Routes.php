@@ -6,9 +6,11 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index');
+$routes->get('detail/(:num)', 'Home::detail/$1');
 
 // CRUD Routes for Bubur Pedas
 $routes->get('buburpedas', 'BuburPedasController::index');
+$routes->get('buburpedas/detail/(:num)', 'Home::detail/$1');
 $routes->get('buburpedas/create', 'BuburPedasController::create');
 $routes->post('buburpedas/store', 'BuburPedasController::store');
 $routes->get('buburpedas/edit/(:num)', 'BuburPedasController::edit/$1');

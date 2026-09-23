@@ -12,7 +12,7 @@ class BuburPedasModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['nama', 'harga', 'deskripsi', 'stok'];
+    protected $allowedFields    = ['nama', 'harga', 'deskripsi', 'stok', 'gambar', 'kategori'];
 
     // Dates
     protected $useTimestamps = true;

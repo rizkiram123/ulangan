@@ -38,12 +38,25 @@
                 </div>
             <?php endif; ?>
 
-            <!-- Nama Menu -->
-            <div class="space-y-2">
-                <label for="nama" class="block text-sm font-bold text-slate-800">
-                    Nama Menu Bubur Pedas <span class="text-rose-500">*</span>
-                </label>
-                <input type="text" id="nama" name="nama" value="<?= old('nama') ?>" placeholder="Contoh: Bubur Pedas Daging Cincang Super" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm transition" required>
+            <!-- Grid: Nama & Kategori -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div class="sm:col-span-2 space-y-2">
+                    <label for="nama" class="block text-sm font-bold text-slate-800">
+                        Nama Menu Bubur Pedas <span class="text-rose-500">*</span>
+                    </label>
+                    <input type="text" id="nama" name="nama" value="<?= old('nama') ?>" placeholder="Contoh: Bubur Pedas Daging Cincang Super" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm transition" required>
+                </div>
+
+                <div class="space-y-2">
+                    <label for="kategori" class="block text-sm font-bold text-slate-800">
+                        Kategori <span class="text-rose-500">*</span>
+                    </label>
+                    <select id="kategori" name="kategori" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm transition font-semibold">
+                        <?php foreach ($categories as $cat): ?>
+                            <option value="<?= $cat ?>" <?= old('kategori') === $cat ? 'selected' : '' ?>><?= $cat ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
             </div>
 
             <!-- Grid: Harga & Stok -->
@@ -68,12 +81,21 @@
                 </div>
             </div>
 
+            <!-- Gambar URL -->
+            <div class="space-y-2">
+                <label for="gambar" class="block text-sm font-bold text-slate-800">
+                    URL Gambar (AI Visual / Unsplash)
+                </label>
+                <input type="url" id="gambar" name="gambar" value="<?= old('gambar') ?>" placeholder="https://images.unsplash.com/..." class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm transition">
+                <p class="text-xs text-slate-400">Kosongkan untuk menggunakan gambar default AI visual.</p>
+            </div>
+
             <!-- Deskripsi -->
             <div class="space-y-2">
                 <label for="deskripsi" class="block text-sm font-bold text-slate-800">
                     Deskripsi / Bahan Pelengkap
                 </label>
-                <textarea id="deskripsi" name="deskripsi" rows="4" placeholder="Jelaskan keunikan rempah, toping, atau rasa khas menu ini..." class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm transition"><?= old('deskripsi') ?></textarea>
+                <textarea id="deskripsi" name="deskripsi" rows="3" placeholder="Jelaskan keunikan rempah, toping, atau rasa khas menu ini..." class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm transition"><?= old('deskripsi') ?></textarea>
             </div>
 
             <!-- Submit Button -->

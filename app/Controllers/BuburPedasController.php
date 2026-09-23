@@ -15,17 +15,32 @@ class BuburPedasController extends BaseController
 
     public function index()
     {
-        $search = $this->request->getGet('search');
+        $search   = $this->request->getGet('search');
+        $kategori = $this->request->getGet('kategori');
+
+        $builder = $this->buburModel->builder();
+
         if ($search) {
-            $menus = $this->buburModel->like('nama', $search)->orLike('deskripsi', $search)->findAll();
-        } else {
-            $menus = $this->buburModel->findAll();
+            $builder->groupStart()
+                    ->like('nama', $search)
+                    ->orLike('deskripsi', $search)
+                    ->orLike('kategori', $search)
+                    ->groupEnd();
         }
 
+        if ($kategori && $kategori !== 'all') {
+            $builder->where('kategori', $kategori);
+        }
+
+        $menus = $builder->orderBy('id', 'DESC')->get()->getResultArray();
+        $categories = ['Tradisional', 'Seafood', 'Daging', 'Ayam', 'Vegetarian', 'Pedas Ekstrem'];
+
         $data = [
-            'title'  => 'Kelola Menu Bubur Pedas - Admin Panel',
-            'menus'  => $menus,
-            'search' => $search,
+            'title'      => 'Kelola Menu Bubur Pedas - Admin Panel',
+            'menus'      => $menus,
+            'search'     => $search,
+            'kategori'   => $kategori,
+            'categories' => $categories,
         ];
 
         return view('bubur_pedas/index', $data);
@@ -35,6 +50,7 @@ class BuburPedasController extends BaseController
     {
         $data = [
             'title'      => 'Tambah Menu Bubur Pedas Baru',
+            'categories' => ['Tradisional', 'Seafood', 'Daging', 'Ayam', 'Vegetarian', 'Pedas Ekstrem'],
             'validation' => \Config\Services::validation(),
         ];
 
@@ -58,6 +74,8 @@ class BuburPedasController extends BaseController
             'harga'     => $this->request->getPost('harga'),
             'deskripsi' => $this->request->getPost('deskripsi'),
             'stok'      => $this->request->getPost('stok'),
+            'kategori'  => $this->request->getPost('kategori') ?: 'Tradisional',
+            'gambar'    => $this->request->getPost('gambar') ?: 'https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=800&q=80',
         ]);
 
         return redirect()->to('/buburpedas')->with('success', 'Menu Bubur Pedas berhasil ditambahkan!');
@@ -74,6 +92,7 @@ class BuburPedasController extends BaseController
         $data = [
             'title'      => 'Edit Menu Bubur Pedas',
             'menu'       => $menu,
+            'categories' => ['Tradisional', 'Seafood', 'Daging', 'Ayam', 'Vegetarian', 'Pedas Ekstrem'],
             'validation' => \Config\Services::validation(),
         ];
 
@@ -102,6 +121,8 @@ class BuburPedasController extends BaseController
             'harga'     => $this->request->getPost('harga'),
             'deskripsi' => $this->request->getPost('deskripsi'),
             'stok'      => $this->request->getPost('stok'),
+            'kategori'  => $this->request->getPost('kategori') ?: 'Tradisional',
+            'gambar'    => $this->request->getPost('gambar') ?: $menu['gambar'],
         ]);
 
         return redirect()->to('/buburpedas')->with('success', 'Menu Bubur Pedas berhasil diperbarui!');
